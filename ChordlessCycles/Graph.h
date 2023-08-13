@@ -2,6 +2,7 @@
 
 #include <list>
 #include <map>
+#include <unordered_set>
 
 enum Color { WHITE, GRAY, BLACK };
 
@@ -15,7 +16,7 @@ public:
 	int label;
 	int blocked;
 
-	std::list<int> adj; // ID of neighbours (adjacency list)
+	std::unordered_set<int> adj; // ID of neighbours (adjacency list)
 	MetaData data; // allows the node to hold anything
 
 	Node(int id, const MetaData data) : id(id), data(data) {};
@@ -33,8 +34,8 @@ public:
 	}
 	// adds edges in both directions
 	void AddEdge(const int id1, const int id2) {
-		vertices[id1]->adj.push_back(id2);
-		vertices[id2]->adj.push_back(id1);
+		vertices[id1]->adj.insert(id2);
+		vertices[id2]->adj.insert(id1);
 	}
 };
 
